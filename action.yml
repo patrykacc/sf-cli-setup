@@ -1,0 +1,24 @@
+name: Setup SF CLI
+runs:
+  using: composite
+  steps:
+    - name: Cache CLI
+      uses: actions/cache@v3
+      id: cache
+      with:
+        path: ~/cli/sf/**
+        key: cli_cache
+
+    - name: Install CLI
+      shell: bash
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: |
+        wget https://developer.salesforce.com/media/salesforce-cli/sf/channels/stable/sf-linux-x64.tar.xz
+        mkdir -p ~/cli/sf
+        tar xJf sf-linux-x64.tar.xz -C ~/cli/sf --strip-components 1
+        echo "~/cli/sf/bin" >> $GITHUB_PATH
+
+    - shell: bash
+      if: steps.cache.outputs.cache-hit == 'true'
+      run: |
+        echo "~/cli/sf/bin" >> $GITHUB_PATH
