@@ -1,4 +1,8 @@
 name: Setup SF CLI
+descritpion: Action provides simple and super fast way to instal and cache Salesforce CLI
+branding:
+  icon: 'terminal'
+  color: 'blue'
 runs:
   using: composite
   steps:
