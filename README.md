@@ -37,6 +37,8 @@ jobs:
 Result:
 <br><img width="423" alt="image" src="https://github.com/user-attachments/assets/a33594c6-5583-42e1-8d7b-a320d4824863">
 
-If my work is helpfull for you simply click below star button - it gives the fuel to bring more actions for our Salesforce community!
+If my work is helpfull for you simply click star button - it gives a lot of fuel to bring more actions for our Salesforce community!
 
-<a class="github-button" href="https://github.com/patrykacc/sf-cli-setup" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star patrykacc/sf-cli-setup on GitHub">Star</a>
+[![patrykacc - sf-cli-setup](https://img.shields.io/static/v1?label=patrykacc&message=sf-cli-setup&color=blue&logo=github)](https://github.com/patrykacc/sf-cli-setup "Go to GitHub repo")
+
+Released under [MIT](/LICENSE) by [@patrykacc](https://github.com/patrykacc).
