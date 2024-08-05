@@ -1,12 +1,12 @@
-# SF (SFDX) CLI setup & cache - Github Action 
+# SF (SFDX) CLI Setup - Github Action 
 Easily setup and cache sf CLI!
 
 Action provides easy way to start working with sf cli in your github workflows.
 Installing cli using this action is much more effective than using sfdx container:
+- 1 line to install and cache
 - waaay faster 🚀
-- 1 line to install and cache 
-- no need to pull image for each run
-- automatic caching provided by action
+- no need to everytime pull image for each run
+- automatic caching provided by action itself
 - running on runner directly allows to use runner preinstalled tools, eg. java, chromium, node
 
 ## Quickstart:
