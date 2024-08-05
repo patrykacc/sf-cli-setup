@@ -1,2 +1,42 @@
-# sf-cli-setup
-Github Action - Easy SFDX CLI setup and cache
+# SF (SFDX) CLI setup & cache - Github Action 
+Easily setup and cache sf CLI!
+
+Action provides easy way to start working with sf cli in your github workflows.
+Installing cli using this action is much more effective than using sfdx container:
+- waaay faster 🚀
+- 1 line to install and cache 
+- no need to pull image for each run
+- automatic caching provided by action
+- running on runner directly allows to use runner preinstalled tools, eg. java, chromium, node
+
+## Quickstart:
+
+Put this line into job in your workflow:
+
+`- uses: patrykacc/sf-cli-setup@main`
+
+And you are all set
+
+
+## Example:
+```
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: patrykacc/sf-cli-setup@main
+
+      - name: CLI Health check
+        run: |
+          echo "CLI Installed succesfuly!"
+          sf -v
+```
+Result:
+<br><img width="423" alt="image" src="https://github.com/user-attachments/assets/a33594c6-5583-42e1-8d7b-a320d4824863">
+
+If my work is helpfull for you simply click below star button - it gives the fuel to bring more actions for our Salesforce community!
+
+<a class="github-button" href="https://github.com/patrykacc/sf-cli-setup" data-color-scheme="no-preference: light; light: light; dark: dark;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star patrykacc/sf-cli-setup on GitHub">Star</a>
