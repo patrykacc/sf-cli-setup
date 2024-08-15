@@ -1,5 +1,5 @@
 # SF (SFDX) CLI Setup - Github Action 
-Easily setup and cache sf CLI!
+Easily setup and cache SF CLI
 
 Action provides easy way to start working with sf cli in your github workflows.
 Installing cli using this action is much more effective than using sfdx container:
