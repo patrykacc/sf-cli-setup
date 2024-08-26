@@ -37,8 +37,7 @@ runs:
         CLI_PATH: ${{ steps.install-cli.outputs.path }}
       with:
         path: $CLI_PATH
-        key:
-          - cli-cache-${{ steps.install-cli.outputs.version }}
+        key: cli-cache-${{ steps.install-cli.outputs.version }}
 
     - uses: actions/cache/save@v4
       env:
