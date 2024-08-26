@@ -13,7 +13,7 @@ runs:
   using: composite
   steps:
     - name: Cache CLI
-      uses: actions/cache@v3
+      uses: actions/cache/restore@v4
       id: cache
       env:
         CLI_VERSION: ${{ inputs.version }}
@@ -23,17 +23,32 @@ runs:
 
     - name: Install CLI
       shell: bash
+      id: install-cli
       env:
         CLI_VERSION: ${{ inputs.version }}
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
         npm install @salesforce/cli@$CLI_VERSION --global
-        which sf
-        cd ~
-        ls -la
-        pwd
+        echo "path=$(which sf)" >> $GITHUB_OUTPUT
+        echo "version=$(sf --version)" >> $GITHUB_OUTPUT
+
+    - uses: actions/cache/save@v4
+      env:
+        CLI_PATH: ${{ steps.install-cli.outputs.path }}
+      with:
+        path: $CLI_PATH
+        key:
+          - cli-cache-${{ steps.install-cli.outputs.version }}
+
+    - uses: actions/cache/save@v4
+      env:
+        CLI_PATH: ${{ steps.install-cli.outputs.path }}
+      with:
+        path: $CLI_PATH
+        key: cli-cache-${{ inputs.version }}
+
 
     - shell: bash
       if: steps.cache.outputs.cache-hit == 'true'
       run: |
-        echo "~/local/bin" >> $GITHUB_PATH
+        echo "/usr/local/bin/sf" >> $GITHUB_PATH
