@@ -9,14 +9,17 @@ inputs:
     required: false
     default: 'latest'
 runs:
+
   using: composite
   steps:
     - name: Cache CLI
       uses: actions/cache@v3
       id: cache
+      env:
+        CLI_VERSION: ${{ inputs.version }}
       with:
-        path: ~/cli/sf/**
-        key: cli_cache
+        path: ~/local/bin/sf/**
+        key: cli-cache-$CLI_VERSION
 
     - name: Install CLI
       shell: bash
@@ -30,4 +33,4 @@ runs:
     - shell: bash
       if: steps.cache.outputs.cache-hit == 'true'
       run: |
-        echo "~/cli/sf/bin" >> $GITHUB_PATH
+        echo "~/local/bin" >> $GITHUB_PATH
