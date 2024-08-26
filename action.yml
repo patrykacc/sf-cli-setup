@@ -29,20 +29,16 @@ runs:
       run: |
         npm install @salesforce/cli@$CLI_VERSION --global
         echo "path=$(which sf)" >> $GITHUB_OUTPUT
-        echo "version=$(sf --version)" >> $GITHUB_OUTPUT
+        echo "version=$(sf --version | grep -o '^\S*')" >> $GITHUB_OUTPUT
 
     - uses: actions/cache/save@v4
-      env:
-        CLI_PATH: ${{ steps.install-cli.outputs.path }}
       with:
-        path: $CLI_PATH
+        path: ${{ steps.install-cli.outputs.path }}
         key: cli-cache-${{ steps.install-cli.outputs.version }}
 
     - uses: actions/cache/save@v4
-      env:
-        CLI_PATH: ${{ steps.install-cli.outputs.path }}
       with:
-        path: $CLI_PATH
+        path: ${{ steps.install-cli.outputs.path }}
         key: cli-cache-${{ inputs.version }}
 
 
