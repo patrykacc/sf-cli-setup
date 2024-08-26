@@ -12,8 +12,8 @@ on:
       - develop
 
 jobs:
-  test:
-    name: Test build
+  no-cahce-test:
+    name: No cache test
     permissions: write-all
     runs-on: 'ubuntu-latest'
     env:
@@ -28,5 +28,15 @@ jobs:
         run: sf --version
 
       - uses: ./
+      - name: Check installed CLI version after restore from cache
+        run: sf --version
+  cached-test:
+    name: Test with cache available
+    runs-on: 'ubuntu-latest'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run action
+        uses: ./
+
       - name: Check installed CLI version after restore from cache
         run: sf --version
