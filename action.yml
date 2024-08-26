@@ -12,14 +12,13 @@ runs:
 
   using: composite
   steps:
-    - name: Cache CLI
+    - name: Restore CLI from cache
       uses: actions/cache/restore@v4
       id: cache
-      env:
-        CLI_VERSION: ${{ inputs.version }}
+
       with:
         path: /usr/local/bin/sf/**
-        key: cli-cache-$CLI_VERSION
+        key: cli-cache-${{ inputs.version }}
 
     - name: Install CLI
       shell: bash
