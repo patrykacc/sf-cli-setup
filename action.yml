@@ -46,6 +46,8 @@ runs:
 
 
     - shell: bash
+      env:
+        CLI_PATH: ${{ steps.install-cli.outputs.path }}
       if: steps.cache.outputs.cache-hit == 'true'
       run: |
-        echo "/usr/local/bin/sf" >> $GITHUB_PATH
+        echo "$CLI_PATH/bin" >> $GITHUB_PATH
