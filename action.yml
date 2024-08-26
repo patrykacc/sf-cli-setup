@@ -16,7 +16,7 @@ runs:
       uses: actions/cache/restore@v3
       id: cache
       with:
-        path: /usr/local/bin/sf/**
+        path: ~/usr/local/bin/sf/**
         key: sf-cli-${{ inputs.version }}
 
     - name: Install CLI
@@ -29,7 +29,7 @@ runs:
         npm install @salesforce/cli@$CLI_VERSION --global
         echo xxxxxxxx
         which sf
-        echo "path=$(which sf)" >> $GITHUB_OUTPUT
+        echo "path=~/$(which sf)" >> $GITHUB_OUTPUT
         echo "version=$(sf --version | grep -o '^\S*')" >> $GITHUB_OUTPUT
 
     - uses: actions/cache/save@v4
