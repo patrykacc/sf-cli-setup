@@ -44,4 +44,5 @@ runs:
     - shell: bash
       if: steps.cache.outputs.cache-hit == 'true'
       run: |
+        cd /usr/local/bin/sf
         echo "/usr/local/bin/sf" >> $GITHUB_PATH
