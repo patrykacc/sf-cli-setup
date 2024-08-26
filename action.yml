@@ -9,21 +9,25 @@ inputs:
     required: false
     default: 'latest'
 runs:
-
   using: composite
   steps:
+    - shell: bash
+      name: Check npm version of package, latest or by input
+      id: check-ver
+      run: echo "version=$(npm show @salesforce/cli@${{ inputs.version }} version)" >> $GITHUB_OUTPUT
+
     - name: Cache CLI
       uses: actions/cache@v4
       id: cache
       with:
         path: ~/sf
-        key: sf-cli-${{ inputs.version }}
+        key: sf-cli-${{ steps.check-ver.outputs.version }}
 
     - name: Install CLI
       shell: bash
       id: install-cli
       env:
-        CLI_VERSION: ${{ inputs.version }}
+        CLI_VERSION: ${{ steps.check-ver.outputs.version }}
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
         npm install --prefix ~/sf @salesforce/cli@$CLI_VERSION --global
