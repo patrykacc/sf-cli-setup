@@ -16,11 +16,14 @@ jobs:
     name: Test build
     runs-on: 'ubuntu-latest'
     steps:
+      - run: gh cache delete --all
       - uses: actions/checkout@v4
       - name: Run action
         uses: ./
-        with:
-          version: 'latest'
 
       - name: Check installed CLI version
+        run: sf --version
+
+      - uses: ./
+      - name: Check installed CLI version after restore from cache
         run: sf --version
