@@ -13,11 +13,11 @@ runs:
   using: composite
   steps:
     - name: Restore CLI from cache
-      uses: actions/cache/restore@v4
+      uses: actions/cache/restore@v3
       id: cache
       with:
         path: /usr/local/bin/sf/**
-        key: cli-cache-${{ inputs.version }}
+        key: sf-cli-${{ inputs.version }}
 
     - name: Install CLI
       shell: bash
@@ -34,13 +34,13 @@ runs:
       if: steps.cache.outputs.cache-hit != 'true'
       with:
         path: ${{ steps.install-cli.outputs.path }}
-        key: cli-cache-${{ steps.install-cli.outputs.version }}
+        key: sf-cli-${{steps.install-cli.outputs.version}}
 
     - uses: actions/cache/save@v4
       if: steps.cache.outputs.cache-hit != 'true'
       with:
         path: ${{ steps.install-cli.outputs.path }}
-        key: cli-cache-${{ inputs.version }}
+        key: sf-cli-${{inputs.version}}
 
 
     - shell: bash
