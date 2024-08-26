@@ -49,4 +49,5 @@ runs:
       run: |
         cd ~/sf
         ls -la
-        echo "~/sf" >> $GITHUB_PATH
+        echo "~/sf/bin/sf" >> $GITHUB_PATH
+        echo "~/sf/bin" >> $GITHUB_PATH
