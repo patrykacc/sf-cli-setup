@@ -1,5 +1,5 @@
 name: Setup SF CLI
-description: Action provides simple and super fast way to instal and cache Salesforce CLI
+description: Action provides simple and super fast way to install and cache Salesforce CLI
 branding:
   icon: 'terminal'
   color: 'blue'
@@ -15,7 +15,6 @@ runs:
     - name: Restore CLI from cache
       uses: actions/cache/restore@v4
       id: cache
-
       with:
         path: /usr/local/bin/sf/**
         key: cli-cache-${{ inputs.version }}
