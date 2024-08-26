@@ -20,7 +20,7 @@ runs:
 
     - name: Install CLI
       shell: bash
-      with:
+      env:
         CLI_VERSION: ${{ inputs.version }}
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
