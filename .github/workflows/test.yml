@@ -12,7 +12,7 @@ on:
       - develop
 
 jobs:
-  no-cahce-test:
+  no-cache-test:
     name: No cache test
     permissions: write-all
     runs-on: 'ubuntu-latest'
@@ -33,6 +33,8 @@ jobs:
   cached-test:
     name: Test with cache available
     runs-on: 'ubuntu-latest'
+    needs:
+      - no-cache-test
     steps:
       - uses: actions/checkout@v4
       - name: Run action
