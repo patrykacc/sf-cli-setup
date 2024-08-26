@@ -2,6 +2,11 @@ name: Test
 on:
   push:
   workflow_dispatch:
+    inputs:
+      version:
+        default: 'latest'
+        required: false
+        description: Version of CLI to be installed
   pull_request:
     branches:
       - main
