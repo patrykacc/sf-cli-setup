@@ -29,6 +29,9 @@ runs:
       run: |
         npm install @salesforce/cli@$CLI_VERSION --global
         which sf
+        cd ~
+        ls -la
+        pwd
 
     - shell: bash
       if: steps.cache.outputs.cache-hit == 'true'
