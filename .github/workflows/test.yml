@@ -18,8 +18,8 @@ jobs:
     env:
       GH_TOKEN: ${{ github.token }}
     steps:
-      - run: gh cache delete --all
       - uses: actions/checkout@v4
+      - run: gh cache delete --all
       - name: Run action
         uses: ./
 
