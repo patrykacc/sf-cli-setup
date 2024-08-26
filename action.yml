@@ -27,7 +27,8 @@ runs:
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
         npm install --prefix ~/sf @salesforce/cli@$CLI_VERSION --global
-        which sf
+        cd ~/sf
+        ls -la
         echo "~/sf" >> $GITHUB_PATH
         echo "version=$(sf --version | grep -o '^\S*')" >> $GITHUB_OUTPUT
 
