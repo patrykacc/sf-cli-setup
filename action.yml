@@ -12,8 +12,8 @@ runs:
 
   using: composite
   steps:
-    - name: Restore CLI from cache
-      uses: actions/cache/restore@v3
+    - name: Cache CLI
+      uses: actions/cache@v4
       id: cache
       with:
         path: ~/sf
@@ -27,24 +27,10 @@ runs:
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
         npm install --prefix ~/sf @salesforce/cli@$CLI_VERSION --global
-        cd ~/sf
-        ls -la
-        echo "~/sf" >> $GITHUB_PATH
-        echo "version=$(sf --version | grep -o '^\S*')" >> $GITHUB_OUTPUT
-
-    - uses: actions/cache/save@v4
-      if: steps.cache.outputs.cache-hit != 'true'
-      with:
-        path: ~/sf
-        key: sf-cli-${{steps.install-cli.outputs.version}}
-
-    - uses: actions/cache/save@v4
-      if: steps.cache.outputs.cache-hit != 'true'
-      with:
-        path: ~/sf
-        key: sf-cli-${{inputs.version}}
 
     - shell: bash
-      if: steps.cache.outputs.cache-hit == 'true'
-      run: |
-        echo "~/sf/bin" >> $GITHUB_PATH
+      run: echo "~/sf/bin" >> $GITHUB_PATH
+
+    - shell: bash
+      run: sf --version
+
