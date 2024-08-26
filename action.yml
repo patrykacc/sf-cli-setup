@@ -18,7 +18,7 @@ runs:
       env:
         CLI_VERSION: ${{ inputs.version }}
       with:
-        path: ~/local/bin/sf/**
+        path: /usr/local/bin/sf/**
         key: cli-cache-$CLI_VERSION
 
     - name: Install CLI
