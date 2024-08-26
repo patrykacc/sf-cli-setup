@@ -32,18 +32,16 @@ runs:
     - uses: actions/cache/save@v4
       if: steps.cache.outputs.cache-hit != 'true'
       with:
-        path: '/usr/local/bin/sf'
+        path: /usr/local/bin/sf
         key: sf-cli-${{steps.install-cli.outputs.version}}
 
     - uses: actions/cache/save@v4
       if: steps.cache.outputs.cache-hit != 'true'
       with:
-        path: '/usr/local/bin/sf'
+        path: /usr/local/bin/sf
         key: sf-cli-${{inputs.version}}
 
     - shell: bash
-      env:
-        CLI_PATH: ${{ steps.install-cli.outputs.path }}
       if: steps.cache.outputs.cache-hit == 'true'
       run: |
-        echo "/usr/local/bin/sf/bin" >> $GITHUB_PATH
+        echo "/usr/local/bin/sf" >> $GITHUB_PATH
