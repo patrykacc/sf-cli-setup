@@ -31,11 +31,13 @@ runs:
         echo "version=$(sf --version | grep -o '^\S*')" >> $GITHUB_OUTPUT
 
     - uses: actions/cache/save@v4
+      if: steps.cache.outputs.cache-hit != 'true'
       with:
         path: ${{ steps.install-cli.outputs.path }}
         key: cli-cache-${{ steps.install-cli.outputs.version }}
 
     - uses: actions/cache/save@v4
+      if: steps.cache.outputs.cache-hit != 'true'
       with:
         path: ${{ steps.install-cli.outputs.path }}
         key: cli-cache-${{ inputs.version }}
