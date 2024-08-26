@@ -3,6 +3,11 @@ description: Action provides simple and super fast way to instal and cache Sales
 branding:
   icon: 'terminal'
   color: 'blue'
+inputs:
+  version:
+    description: Version of CLI to be installed
+    required: false
+    default: 'latest'
 runs:
   using: composite
   steps:
@@ -15,9 +20,11 @@ runs:
 
     - name: Install CLI
       shell: bash
+      with:
+        CLI_VERSION: ${{ inputs.version }}
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
-        npm install @salesforce/cli --global
+        npm install @salesforce/cli@$CLI_VERSION --global
         which sf
 
     - shell: bash

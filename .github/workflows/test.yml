@@ -1,0 +1,19 @@
+name: Test
+on:
+  push:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Test build
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: Run action
+        uses: ./
+        with:
+          version: 'latest'
+
+      - name: Check installed CLI version
+        run: sf --version
