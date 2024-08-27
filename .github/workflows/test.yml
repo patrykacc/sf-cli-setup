@@ -46,7 +46,7 @@ jobs:
       - name: Check installed CLI version after restore from cache
         run: sf --version
   no-cache-test-specified-version:
-    name: No cache test - Latest Version
+    name: No cache test - Version 2.55.0
     permissions: write-all
     runs-on: 'ubuntu-latest'
     env:
@@ -71,7 +71,7 @@ jobs:
       - name: Check installed CLI version after restore from cache
         run: sf --version
   cached-test-specified-version:
-    name: Test with cache available - Latest Version
+    name: Test with cache available - Version 2.55.0
     runs-on: 'ubuntu-latest'
     needs:
       - no-cache-test-specified-version
