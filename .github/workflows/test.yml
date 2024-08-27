@@ -73,7 +73,7 @@ jobs:
         run: echo "version=$(sf --version)" >> $GITHUB_OUTPUT
       - uses: nick-fields/assert-action@v2
         with:
-          expected: '@salesforce/cli/2.55.6 linux-x64 node-v18.20.4'
+          expected: '@salesforce/cli/2.55.0 linux-x64 node-v18.20.4'
           actual: ${{ steps.version-check-2550.outputs.version }}
 
   cached-test-specified-version:
@@ -93,5 +93,5 @@ jobs:
         run: echo "version=$(sf --version)" >> $GITHUB_OUTPUT
       - uses: nick-fields/assert-action@v2
         with:
-          expected: '@salesforce/cli/2.55.6 linux-x64 node-v18.20.4'
+          expected: '@salesforce/cli/2.55.0 linux-x64 node-v18.20.4'
           actual: ${{ steps.version-check-2550-cache.outputs.version }}
