@@ -1,7 +1,7 @@
 # SF (SFDX) CLI Setup - Github Action 
 ### Easily setup and cache SF CLI
 
-Main: ![Health check](https://github.com/patrykacc/sf-cli-setup/actions/workflows/test.yml/badge.svg?branch=main)
+Main: ![Health check](https://github.com/patrykacc/sf-cli-setup/actions/workflows/test.yml/badge.svg?branch=develop)
 
 Action provides easy way to start working with sf cli in your GitHub workflows.
 Installing cli using this action is much more effective than using the sfdx docker container.
