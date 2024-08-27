@@ -20,7 +20,10 @@ jobs:
       GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
-      - run: gh cache delete --all
+      - name: Cleanup cache
+        run: gh cache delete --all
+        continue-on-error: true
+
       - name: Run action
         uses: ./
 
@@ -50,7 +53,10 @@ jobs:
       GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
-      - run: gh cache delete --all
+      - name: Cleanup cache
+        run: gh cache delete --all
+        continue-on-error: true
+
       - name: Run action
         uses: ./
         with:
