@@ -64,7 +64,7 @@ jobs:
           expected: ${{ steps.get-latest-ver.outputs.latest_version }}
           actual: ${{ steps.version-check.outputs.version }}
 
-  no-cache-test-specified-version:
+  no-cache-version-2550:
     name: No cache test - Version 2.55.0
     permissions: write-all
     runs-on: 'ubuntu-latest'
@@ -82,24 +82,19 @@ jobs:
           version: 2.55.0
 
       - name: Check installed CLI version
-        run: sf --version
-
-      - uses: ./
-        with:
-          version: 2.55.0
-      - name: Check installed CLI version after restore from cache
         id: version-check
         run: echo "version=$(sf --version)" >> $GITHUB_OUTPUT
+
       - uses: nick-fields/assert-action@v2
         with:
           expected: '@salesforce/cli/2.55.0 linux-x64 node-v18.20.4'
           actual: ${{ steps.version-check.outputs.version }}
 
-  cached-test-specified-version:
+  cached-version-2550:
     name: Test with cache available - Version 2.55.0
     runs-on: 'ubuntu-latest'
     needs:
-      - no-cache-test-specified-version
+      - no-cache-version-2550
     steps:
       - uses: actions/checkout@v4
       - name: Run action
