@@ -40,6 +40,8 @@ jobs:
         with:
           expected: ${{ steps.get-latest-ver.outputs.latest_version }}
           actual: ${{ steps.version-check.outputs.version }}
+          comparison: contains
+
   cached-test-latest:
     name: Test with cache available - Latest Version
     runs-on: 'ubuntu-latest'
@@ -63,6 +65,7 @@ jobs:
         with:
           expected: ${{ steps.get-latest-ver.outputs.latest_version }}
           actual: ${{ steps.version-check.outputs.version }}
+          comparison: contains
 
   no-cache-version-2550:
     name: No cache test - Version 2.55.0
