@@ -12,8 +12,8 @@ runs:
   using: composite
   steps:
     - shell: bash
-      name: Check npm version of package, latest or by input
-      id: check-ver
+      name: Check version of package in NPM registry
+      id: get-npm-version
       run: echo "version=$(npm show @salesforce/cli@${{ inputs.version }} version)" >> $GITHUB_OUTPUT
 
     - name: Cache CLI
@@ -21,20 +21,23 @@ runs:
       id: cache
       with:
         path: ~/sf
-        key: sf-cli-${{ steps.check-ver.outputs.version }}
+        key: sf-cli-${{ steps.get-npm-version.outputs.version }}
 
     - name: Install CLI
       shell: bash
       id: install-cli
       env:
-        CLI_VERSION: ${{ steps.check-ver.outputs.version }}
+        CLI_VERSION: ${{ steps.get-npm-version.outputs.version }}
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
         npm install --prefix ~/sf @salesforce/cli@$CLI_VERSION --global
 
-    - shell: bash
+    - name: Add binary to PATH
+      shell: bash
       run: echo "~/sf/bin" >> $GITHUB_PATH
 
-    - shell: bash
-      run: sf --version
+    - name: Display installed CLI Version
+      shell: bash
+      run: |
+        echo "CLI Installed with version: $(sf --version)"
 
