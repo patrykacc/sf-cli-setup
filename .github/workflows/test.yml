@@ -34,7 +34,7 @@ jobs:
     name: Test with cache available - Latest Version
     runs-on: 'ubuntu-latest'
     needs:
-      - no-cache-test
+      - no-cache-test-latest
     steps:
       - uses: actions/checkout@v4
       - name: Run action
@@ -68,7 +68,7 @@ jobs:
     name: Test with cache available - Latest Version
     runs-on: 'ubuntu-latest'
     needs:
-      - no-cache-test
+      - no-cache-test-specified-version
     steps:
       - uses: actions/checkout@v4
       - name: Run action
