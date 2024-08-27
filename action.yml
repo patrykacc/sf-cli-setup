@@ -1,28 +1,43 @@
 name: Setup SF CLI
-description: Action provides simple and super fast way to instal and cache Salesforce CLI
+description: Action provides simple and super fast way to install and cache Salesforce CLI
 branding:
   icon: 'terminal'
   color: 'blue'
+inputs:
+  version:
+    description: Version of CLI to be installed
+    required: false
+    default: 'latest'
 runs:
   using: composite
   steps:
+    - shell: bash
+      name: Check version of package in NPM registry
+      id: get-npm-version
+      run: echo "version=$(npm show @salesforce/cli@${{ inputs.version }} version)" >> $GITHUB_OUTPUT
+
     - name: Cache CLI
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       id: cache
       with:
-        path: ~/cli/sf/**
-        key: cli_cache
+        path: ~/sf
+        key: sf-cli-${{ steps.get-npm-version.outputs.version }}
 
     - name: Install CLI
       shell: bash
+      id: install-cli
+      env:
+        CLI_VERSION: ${{ steps.get-npm-version.outputs.version }}
       if: steps.cache.outputs.cache-hit != 'true'
       run: |
-        wget https://developer.salesforce.com/media/salesforce-cli/sf/channels/stable/sf-linux-x64.tar.xz
-        mkdir -p ~/cli/sf
-        tar xJf sf-linux-x64.tar.xz -C ~/cli/sf --strip-components 1
-        echo "~/cli/sf/bin" >> $GITHUB_PATH
+        npm install --prefix ~/sf @salesforce/cli@$CLI_VERSION --global
 
-    - shell: bash
-      if: steps.cache.outputs.cache-hit == 'true'
+    - name: Add binary to PATH
+      shell: bash
+      run: echo "~/sf/bin" >> $GITHUB_PATH
+
+    - name: Display installed CLI Version
+      shell: bash
       run: |
-        echo "~/cli/sf/bin" >> $GITHUB_PATH
+        echo "CLI Installed with version: $(sf --version)"
+
