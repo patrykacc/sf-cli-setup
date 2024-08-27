@@ -17,7 +17,7 @@ Action characteristics:
 Put this line into job in your workflow:
 
 ```yaml
-- uses: patrykacc/sf-cli-setup@v1
+- uses: patrykacc/sf-cli-setup@v1.1.0
 ```
 
 ### Example:
@@ -29,7 +29,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: patrykacc/sf-cli-setup@v1
+      - uses: patrykacc/sf-cli-setup@v1.1.0
       - name: CLI Health check
         run: |
           echo "CLI Installed succesfuly!"
@@ -45,14 +45,14 @@ where you can specify which exactly version should be installed.
 
 ```yaml
     - name: Install CLI
-      uses: patrykacc/sf-cli-setup@v1
+      uses: patrykacc/sf-cli-setup@v1.1.0
       with:
         version: 2.55.0
 ```
 You can easily externalize to GitHub setup the configuration, so you can manage CLI versions, without code modifications:
 ```yaml
     - name: Install CLI
-      uses: patrykacc/sf-cli-setup@v1
+      uses: patrykacc/sf-cli-setup@v1.1.0
       with:
         version: ${{ vars.SF_CLI_VERSION }} # eg. 'latest'
 
