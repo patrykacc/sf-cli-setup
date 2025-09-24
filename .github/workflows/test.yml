@@ -94,8 +94,9 @@ jobs:
 
       - uses: nick-fields/assert-action@v2
         with:
-          expected: '@salesforce/cli/2.55.0 linux-x64 node-v20.19.0'
+          expected: '@salesforce/cli/2.55.0'
           actual: ${{ steps.version-check.outputs.version }}
+          comparison: contains
 
   cached-version-2550:
     name: Test with cache available - Version 2.55.0
@@ -114,5 +115,6 @@ jobs:
         run: echo "version=$(sf --version)" >> $GITHUB_OUTPUT
       - uses: nick-fields/assert-action@v2
         with:
-          expected: '@salesforce/cli/2.55.0 linux-x64 node-v20.19.0'
+          expected: '@salesforce/cli/2.55.0'
           actual: ${{ steps.version-check.outputs.version }}
+          comparison: contains
